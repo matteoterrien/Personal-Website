@@ -1,0 +1,7 @@
+:root {
+  --color-primary-background: #f7d792; /* Header background, decorative yellow */
+  --color-secondary-background: #e0a25181; /* Body background, light transparent orange */
+  --color-primary-text: #a61a0a; /* Main text color, deep red */
+  --color-accent: #2c5717; /* Accent color, used for links and borders */
+  --font-family-primary: "Trebuchet MS"; /* Main font for titles and headings */
+}

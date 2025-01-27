@@ -1,0 +1,114 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-primary-background);
+  min-height: 3.5rem;
+  border-bottom: 2px solid black;
+  padding-inline: 2rem;
+}
+
+body {
+  background-color: var(--color-secondary-background);
+  color: var(--color-primary-text);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0;
+  font-family: var(--font-family-primary);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+dd,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-left: 1rem;
+}
+
+.name_title {
+  font-family: var(--font-family-primary);
+}
+
+.home_grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.left_col {
+  display: grid;
+  grid-column: 1;
+  padding: 1rem;
+}
+
+.contact_info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  line-height: 0.5rem;
+}
+
+.right_col {
+  display: grid;
+  grid-template-rows: 1fr 0.6fr 0.4fr 1fr;
+  grid-column: 2;
+  align-self: start;
+  align-items: center;
+}
+
+.right_col p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.about_me {
+  font-family: var(--font-family-primary);
+  border-bottom: 3px solid var(--color-accent);
+  line-height: 3rem;
+}
+
+.sub_header {
+  border-bottom: 2px solid black;
+  max-width: 85rem;
+  font-size: 1.5rem;
+}
+
+.portfolio_subhead {
+  display: grid;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.projects {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.project {
+  padding: 1rem;
+  border: 1px solid var(--color-primary-text);
+  border-radius: 10px;
+}
+
+.project_title {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
