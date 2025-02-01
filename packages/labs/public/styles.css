@@ -18,6 +18,15 @@ nav {
   gap: 1rem;
 }
 
+nav a {
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: rgba(181, 181, 181, 0.659);
+  border-bottom: 4px solid var(--color-accent);
+}
+
 h2 {
   font-size: 2rem;
   margin-bottom: 0;
@@ -58,7 +67,7 @@ li {
 
 .contact_info {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 0.5fr 2.5fr;
   line-height: 0.5rem;
 }
 
