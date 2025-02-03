@@ -19,9 +19,15 @@ navHtml += "</nav>";
 const TEMPLATE = document.createElement("template");
 TEMPLATE.innerHTML = `
   <header>
-    <div id='mobile'>
+    <div id='mobile-header'>
       <h1 class='name_title'>Matteo Terrien</h1>
-      <button id='menu'>Menu</button>
+      <div id='mobile'>
+        <label id='darkmode'>
+          <input type="checkbox" autocomplete="off"/>
+            Dark mode
+        </label>
+        <button id='menu'>Menu</button>
+      </div>
     </div>
     ${navHtml}
   </header>
@@ -34,11 +40,12 @@ TEMPLATE.innerHTML = `
       min-height: 3.5rem;
       border-bottom: 2px solid black;
       padding-inline: 2rem;
+      align-items: center;
     }
 
     button {
       display: none;
-      height: 3rem;
+      height: 2rem;
       width: 4rem;
       color: var(--color-accent);
       align-self: center;
@@ -57,29 +64,64 @@ TEMPLATE.innerHTML = `
 
     nav a.active {
       border-bottom: 4px solid var(--color-accent);
+      margin-bottom: -0.1rem;
+    }
+
+    label {
+      margin-bottom: 0.15rem;
+      margin-right: 1rem;
+    }
+
+    #mobile-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
 
     #mobile {
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-end;
+      align-items: center;
     }
 
     @media (max-width: 40rem) {
       header {
+        display: flex;
         flex-direction: column;
       }
+
+      #mobile-header {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-self: flex-start;
+      }
+
+      #mobile {
+        width: 55%;
+        justify-content: flex-end;
+      }
+
       nav {
         display: none;
-        flex-direction: column;
-        align-items: start;
-        margin-bottom: 1rem;
       }
+        
       button {
         display: block;
       }
+
       nav.open {
         display: flex;
+        flex-direction: column;
+        align-self: start;
+        align-items: start;
+        margin-bottom: 1rem;
+      }
+
+      nav.close {
+        display: none;
       }
     }
   </style>
@@ -90,11 +132,13 @@ class CustomHeader extends HTMLElement {
   constructor() {
     super();
     attachShadow(this, TEMPLATE);
+    this.highlightCurrentLink();
   }
 
   connectedCallback() {
     this.highlightCurrentLink();
     this.setupMenuToggle();
+    this.darkModeToggle();
   }
 
   highlightCurrentLink() {
@@ -113,7 +157,31 @@ class CustomHeader extends HTMLElement {
     const links = this.shadowRoot.querySelector("#links");
 
     menuButton.addEventListener("click", () => {
-      links.classList.toggle("open");
+      if (links.classList.contains("open")) {
+        links.classList.remove("open");
+      } else {
+        links.classList.add("open");
+      }
+    });
+
+    document.body.addEventListener("click", (event) => {
+      const isClickInsideMenu = this.contains(event.target);
+
+      if (!isClickInsideMenu) {
+        links.classList.remove("open");
+      }
+    });
+  }
+
+  darkModeToggle() {
+    const darkMode = this.shadowRoot.querySelector("#darkmode");
+
+    darkMode.addEventListener("change", () => {
+      if (document.body.classList.contains("dark-mode")) {
+        document.body.classList.remove("dark-mode");
+      } else {
+        document.body.classList.add("dark-mode");
+      }
     });
   }
 }

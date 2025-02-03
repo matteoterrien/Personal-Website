@@ -5,3 +5,10 @@
   --color-accent: #2c5717; /* Accent color, used for links and borders */
   --font-family-primary: "Trebuchet MS"; /* Main font for titles and headings */
 }
+
+body.dark-mode {
+  --color-primary-background: #8f7e5c; /* Header background, decorative yellow */
+  --color-secondary-background: #715a3b81; /* Body background, light transparent orange */
+  --color-primary-text: #581912; /* Main text color, deep red */
+  --color-accent: #2a411e; /* Accent color, used for links and borders */
+}

@@ -23,7 +23,7 @@ nav a {
 }
 
 nav a:hover {
-  background-color: rgba(181, 181, 181, 0.659);
+  background-color: rgba(181, 181, 181, 0.627);
   border-bottom: 4px solid var(--color-accent);
 }
 
