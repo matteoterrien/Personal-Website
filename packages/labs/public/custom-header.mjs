@@ -133,6 +133,7 @@ class CustomHeader extends HTMLElement {
     super();
     attachShadow(this, TEMPLATE);
     this.highlightCurrentLink();
+    this.checkForDarkMode();
   }
 
   connectedCallback() {
@@ -179,10 +180,26 @@ class CustomHeader extends HTMLElement {
     darkMode.addEventListener("change", () => {
       if (document.body.classList.contains("dark-mode")) {
         document.body.classList.remove("dark-mode");
+        localStorage.setItem("darkMode", "false");
       } else {
         document.body.classList.add("dark-mode");
+        localStorage.setItem("darkMode", "true");
       }
     });
+  }
+
+  checkForDarkMode() {
+    const darkMode = this.shadowRoot.querySelector("#darkmode input");
+
+    const isDarkMode = localStorage.getItem("darkMode") === "true";
+
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+      darkMode.checked = true;
+    } else {
+      document.body.classList.remove("dark-mode");
+      darkMode.checked = false;
+    }
   }
 }
 
