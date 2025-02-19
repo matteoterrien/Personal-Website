@@ -1,10 +1,10 @@
 import { attachShadow } from "./utils.mjs";
 
 const navLinks = [
-  { href: "/packages/labs/public/index.html", text: "Home" },
-  { href: "/packages/labs/public/portfolio.html", text: "Portfolio" },
+  { href: "index.html", text: "Home" },
+  { href: "portfolio.html", text: "Portfolio" },
   {
-    href: "/packages/labs/public/files/Matteo Terrien Resume.pdf",
+    href: "/files/Matteo Terrien Resume.pdf",
     text: "Resume",
   },
 ];
