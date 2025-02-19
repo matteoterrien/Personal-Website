@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+th {
+  padding-inline: 1em;
+}
+
+td {
+  padding-inline: 1em;
+}
