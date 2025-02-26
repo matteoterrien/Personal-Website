@@ -1,6 +1,7 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Spinner } from "./Spinner";
+import { groceryFetcher } from "./groceryFetcher";
 
 const MDN_URL =
   "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json";
@@ -19,20 +20,34 @@ export function GroceryPanel(props) {
   const [groceryData, setGroceryData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [dropdown, setDropdown] = useState("MDN");
 
-  async function fetchData(url) {
-    setIsLoading(true);
+  let isStale = false;
+
+  async function fetchData(name) {
+    setGroceryData([]);
     await delayMs(2000);
     try {
-      const promise = await fetch(url);
-      const data = await promise.json();
-      setGroceryData(data);
-      setError(null);
+      const data = await groceryFetcher.fetch(name);
+
+      if (!isStale) {
+        setGroceryData(data);
+        setError(null);
+      }
     } catch (error) {
-      setError("Error fetching data.");
+      if (!isStale) {
+        setError("Error fetching data.");
+      }
     }
-    setIsLoading(false);
   }
+
+  useEffect(() => {
+    fetchData(dropdown);
+
+    return () => {
+      isStale = false;
+    };
+  }, [dropdown]);
 
   function handleAddTodoClicked(item) {
     const todoName = `Buy ${item.name} (${item.price.toFixed(2)})`;
@@ -46,8 +61,7 @@ export function GroceryPanel(props) {
       return;
     }
 
-    setGroceryData([]);
-    fetchData(changeEvent.target.value);
+    setDropdown(changeEvent.target.value);
   }
 
   return (
@@ -59,10 +73,12 @@ export function GroceryPanel(props) {
           className="border border-gray-300 p-1 rounded-sm disabled:opacity-50"
           disabled={isLoading}
           onChange={handleDropdownChange}
+          value={dropdown}
         >
-          <option value="">(None selected)</option>
-          <option value={MDN_URL}>MDN</option>
-          <option value="invalid">Who knows?</option>
+          <option value="MDN">MDN</option>
+          <option value="Liquor store">Liquor store</option>
+          <option value="Butcher">Butcher</option>
+          <option value="whoknows">Who knows?</option>
         </select>
         {isLoading ? <Spinner /> : null}
         {error ? <p className="text-red-500 text-sm">{error}</p> : null}

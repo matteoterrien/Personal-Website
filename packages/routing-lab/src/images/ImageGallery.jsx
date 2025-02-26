@@ -4,7 +4,7 @@ import "./ImageGallery.css";
 export function ImageGallery(props) {
   const imageElements = props.fetchedImages.map((image) => (
     <div key={image.id} className="ImageGallery-photo-container">
-      <Link to={"/images/" + image.id}>
+      <Link to={"/images/" + image.key}>
         <img src={image.src} alt={image.name} />
       </Link>
     </div>
