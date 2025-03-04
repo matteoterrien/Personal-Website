@@ -47,9 +47,7 @@ app.get("/api/images", async (req: Request, res: Response) => {
 });
 
 app.get("*", (req: Request, res: Response) => {
-  const indexPath = path.join(__dirname, "../../routing-lab/dist/index.html");
-
-  res.sendFile(indexPath);
+  res.sendFile(staticDir);
 
   console.log("none of the routes above me were matched");
 });
