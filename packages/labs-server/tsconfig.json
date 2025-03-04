@@ -3,7 +3,7 @@
     "target": "es2023",
     "module": "NodeNext",
     "baseUrl": "./src",
-    "outDir": "../routing-lab/dist",
+    "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "NodeNext",
